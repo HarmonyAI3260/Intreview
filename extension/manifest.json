@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Meeting Assistant (MVP)",
+  "version": "0.1.0",
+  "description": "Real-time meeting assistant that listens to the current tab and overlays answers to questions.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "http://localhost:3030/*",
+    "https://localhost:3030/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://meet.google.com/*",
+        "https://teams.microsoft.com/*",
+        "https://*.zoom.us/*",
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": ["contentScript.js"],
+      "css": ["overlay.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["audioWorkletProcessor.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
